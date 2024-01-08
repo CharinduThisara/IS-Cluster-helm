@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+Namespace: wso2is
 wso2:
   deployment:
     dependencies:
@@ -20,6 +20,7 @@ wso2:
         enabled: true
 
     wso2is:
+      config: true
       # Container image configurations
       # If a custom image must be used, provide its value
       dockerRegistry: "docker.wso2.com"
@@ -29,7 +30,7 @@ wso2:
       imagePullPolicy: Never
 
       # Number of deployment replicas
-      replicas: 2
+      replicas: 1
 
       # Kubernetes Probes
       # Startup probe executed prior to Liveness Probe taking over

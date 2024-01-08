@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  namespace: {{ .Values.Namespace }}
+spec:
+  type: ExternalName
+  externalName: 10.0.2.2  # Resolve to your local machine
+  ports:
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306

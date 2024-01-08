@@ -15,8 +15,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ template "is-pattern-1.resource.prefix" . }}-identity-server-ingress
-  namespace : {{ .Release.Namespace }}
+  name: identity-server-ingress
+  namespace : {{ .Values.Namespace }}
 {{- if .Values.wso2.deployment.wso2is.ingress.identity.annotations }}
   annotations:
 {{ toYaml .Values.wso2.deployment.wso2is.ingress.identity.annotations | indent 4 }}
@@ -36,6 +36,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ template "is-pattern-1.resource.prefix" . }}-identity-service
+            name: identity-service
             port:
               number: 9443

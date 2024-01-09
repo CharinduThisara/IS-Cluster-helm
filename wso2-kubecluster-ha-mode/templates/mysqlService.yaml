@@ -1,13 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wso2is-mysql-deployment
+  namespace: {{ .Values.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: wso2is-mysql
+      pod: wso2is
+  template:
+    metadata:
+      labels:
+        deployment: wso2is-mysql
+        pod: wso2is
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 999
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_USER
+              value: regadmin
+            - name: MYSQL_PASSWORD
+              value: regadmin
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - name: mysql-dbscripts
+              mountPath: /docker-entrypoint-initdb.d
+
+      volumes:
+        - name: mysql-dbscripts
+          configMap:
+            name: mysql-dbscripts
+
+---
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql-service
+  name: wso2is-rdbms-service-mysql
   namespace: {{ .Values.Namespace }}
 spec:
-  type: ExternalName
-  externalName: 10.0.2.2  # Resolve to your local machine
+  type: ClusterIP
+  selector:
+    app: mysql
   ports:
-    - name: mysql
-      protocol: TCP
+    - name: mysql-port
       port: 3306
       targetPort: 3306
+      protocol: TCP
+
+
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: mysql-pvc
+#   namespace : {{ .Values.Namespace }}
+# spec:
+#   accessModes:
+#    - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi
+
+# - name: mysql-persistent-storage
+        #   mountPath: /var/lib/mysql
+
+   # - name: mysql-persistent-storage
+      #   persistentVolumeClaim:
+      #   claimName: mysql-pvc

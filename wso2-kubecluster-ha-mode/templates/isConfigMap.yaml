@@ -41,12 +41,14 @@ data:
     url = "jdbc:mysql://wso2is-rdbms-service-mysql:3306/WSO2IS_IDENTITY_DB"
     username = "regadmin"
     password = "regadmin"
+    driver = "com.mysql.cj.jdbc.Driver"
 
     [database.shared_db]
     type = "mysql"
     url = "jdbc:mysql://wso2is-rdbms-service-mysql:3306/WSO2IS_SHARED_DB"
     username = "regadmin"
     password = "regadmin"
+    driver = "com.mysql.cj.jdbc.Driver"
 
     [database.identity_db.pool_options]
     maxActive = "80"

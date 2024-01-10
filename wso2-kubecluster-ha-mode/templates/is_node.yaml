@@ -23,7 +23,11 @@ spec:
             - containerPort: 4000
             - containerPort: 9763
             - containerPort: 3306
-
+          env:
+            - name: NODE_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           volumeMounts: 
             - name: identity-server-conf
               mountPath: /app/wso2is-6.1.0/repository/conf/deployment.toml
@@ -33,3 +37,4 @@ spec:
         - name: identity-server-conf
           configMap:
             name: identity-server-conf
+      serviceAccountName: is-service-account

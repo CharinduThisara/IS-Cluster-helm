@@ -4,9 +4,9 @@ metadata:
   name: endpoint-reader-binding
   namespace: wso2is
 subjects:
-- kind: ServiceAccount
-  name: is-service-account
-  namespace: wso2is
+  - kind: ServiceAccount
+    name: is-service-account
+    namespace: wso2is
 roleRef:
   kind: Role
   name: endpoint-reader

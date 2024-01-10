@@ -7,11 +7,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
+      app: mysql  
       deployment: wso2is-mysql
       pod: wso2is
   template:
     metadata:
       labels:
+        app: mysql
         deployment: wso2is-mysql
         pod: wso2is
     spec:

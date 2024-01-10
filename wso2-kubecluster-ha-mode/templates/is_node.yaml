@@ -4,16 +4,16 @@ metadata:
   name: wso2-is-node
   namespace: {{ .Values.Namespace }}
   labels:
-    app: wso2is  # Labels for the deployment itself
+    deployment: wso2is # Labels for the deployment itself
 spec:
   selector:
     matchLabels:
-      app: wso2is  # Selector labels to match labels in the pod template
+      deployment: wso2is  # Selector labels to match labels in the pod template
   replicas: {{ .Values.wso2.deployment.wso2is.replicas }}
   template:
     metadata:
       labels:
-        app: wso2is  # Labels applied to pods created by this template
+        deployment: wso2is  # Labels applied to pods created by this template
     spec:
       containers:
         - name: wso2-is-container

@@ -19,7 +19,7 @@ wso2:
         # The configuration should be set to be 'true' if a MySQL database should be spawned as a pod within the cluster
         enabled: true
 
-    wso2is:
+    wso2is: 
       config: true
       # Container image configurations
       # If a custom image must be used, provide its value
@@ -30,7 +30,7 @@ wso2:
       imagePullPolicy: Never
 
       # Number of deployment replicas
-      replicas: 1
+      replicas: 2
 
       # Kubernetes Probes
       # Startup probe executed prior to Liveness Probe taking over

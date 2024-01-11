@@ -24,7 +24,7 @@ data:
   deployment.toml: |-
     # Deployment config for Identity Server deployment
     [server]
-    hostname = "localhost"
+    hostname = "{{ .Values.wso2.deployment.wso2is.hostname }}"
     node_ip = "$env{NODE_IP}"
     base_path = "https://$ref{server.hostname}:${carbon.management.port}"
     force_local_cache = true
@@ -86,6 +86,7 @@ data:
     "hazelcast.shutdownhook.enabled" = "false"
     "hazelcast.logging.type"= "log4j2"
 
+    
     [keystore.primary]
     file_name = "wso2carbon.jks"
     password = "wso2carbon"

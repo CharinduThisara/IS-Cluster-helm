@@ -17,22 +17,16 @@ kind: Ingress
 metadata:
   name: identity-server-ingress
   namespace : {{ .Values.Namespace }}
-{{- if .Values.wso2.deployment.wso2is.ingress.identity.annotations }}
-  annotations:
-{{ toYaml .Values.wso2.deployment.wso2is.ingress.identity.annotations | indent 4 }}
-{{- end }}
 spec:
-  {{- if .Values.wso2.deployment.wso2is.ingress.className }}
   ingressClassName: {{ .Values.wso2.deployment.wso2is.ingress.className }}
-  {{- end }}
   tls:
   - hosts:
-    - {{ .Values.wso2.deployment.wso2is.ingress.identity.hostname }}
+    - {{ .Values.wso2.deployment.wso2is.hostname }}
   rules:
-  - host: {{ .Values.wso2.deployment.wso2is.ingress.identity.hostname }}
+  - host: {{ .Values.wso2.deployment.wso2is.hostname }}
     http:
       paths:
-      - path: /
+      - path: /is
         pathType: Prefix
         backend:
           service:

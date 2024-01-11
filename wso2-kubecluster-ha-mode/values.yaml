@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 Namespace: wso2is
+
 wso2:
   deployment:
     dependencies:
@@ -23,6 +24,7 @@ wso2:
       config: true
       # Container image configurations
       # If a custom image must be used, provide its value
+      hostname: "wso2.is"
       dockerRegistry: "docker.wso2.com"
       imageName: "wso2is"
       imageTag: "6.1.0.0"
@@ -86,7 +88,7 @@ wso2:
 
       # Configure Ingresses
       ingress:
-        className: ""
+        className: "nginx"
         identity:
           # Hostname for Identity Server
           hostname: "identity.wso2.com"

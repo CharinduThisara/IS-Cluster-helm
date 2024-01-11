@@ -17,13 +17,14 @@ kind: Ingress
 metadata:
   name: identity-server-ingress
   namespace : {{ .Values.Namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: {{ .Values.wso2.deployment.wso2is.ingress.className }}
   tls:
   - hosts:
-    - {{ .Values.wso2.deployment.wso2is.hostname }}
+    - {{ .Values.wso2.deployment.wso2is.hostname }} 
   rules:
-  - host: {{ .Values.wso2.deployment.wso2is.hostname }}
+  - host: {{ .Values.wso2.deployment.wso2is.hostname }} 
     http:
       paths:
       - path: /is

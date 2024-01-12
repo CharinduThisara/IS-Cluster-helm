@@ -18,16 +18,17 @@ metadata:
   name: identity-server-ingress
   namespace : {{ .Values.Namespace }}
   annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  tls:
-  - hosts:
-    - {{ .Values.wso2.deployment.wso2is.hostname }} 
   rules:
   - host: {{ .Values.wso2.deployment.wso2is.hostname }} 
     http:
       paths:
-      - path: /is
+      - path: /
         pathType: Prefix
         backend:
           service:
